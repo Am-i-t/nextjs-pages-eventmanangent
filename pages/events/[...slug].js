@@ -8,6 +8,9 @@ import ErrorAlert from "../../components/ui/error-alert";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default function FilteredEventPage(props) {
   const [loadedEvents,setLoadedEvents] = useState()
@@ -17,7 +20,7 @@ export default function FilteredEventPage(props) {
 
  const fetcher = (...args) => fetch(...args).then(res => res.json())
   const { data, error } = useSWR(
-    "https://nextjs-dummy-data-cba3e-default-rtdb.firebaseio.com/events.json",fetcher
+   process.env.FIREBASE_URL,fetcher
   );
 
   useEffect(() => {
